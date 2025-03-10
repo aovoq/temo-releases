@@ -2,7 +2,7 @@ name: "release"
 
 on:
   repository_dispatch:
-    type: [on-demand-release]
+    types: [on-demand-release]
 
 jobs:
   publish-tauri:
@@ -11,15 +11,16 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        - platform: macos-latest
-          args: "--target aarch64-apple-darwin"
-          name: macOS arm64
-        - platform: macos-latest
-          args: "--target x86_64-apple-darwin"
-          name: macOS Intel
-        - platform: "windows-latest"
-          args: ""
-          name: Windows
+        include:
+          - platform: macos-latest
+            args: "--target aarch64-apple-darwin"
+            name: macOS arm64
+          - platform: macos-latest
+            args: "--target x86_64-apple-darwin"
+            name: macOS Intel
+          - platform: "windows-latest"
+            args: ""
+            name: Windows
     
     name: ${{ matrix.name }}
     runs-on: ${{ matrix.platform }}
@@ -28,7 +29,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: aovoq/temo
-          token: ${{ secrets.GITHUB_TOKEN_FOR_CHECKOUT }}
+          token: ${{ secrets.GH_TOKEN_FOR_CHECKOUT }}
           ref: ${{ github.event.client_payload.sha }}
       
       - name: Test Echo
