@@ -3,4 +3,4 @@
 
 ## 
 Requires macOS 12 Monterey or later.
-and Apple Silicon chip.
+Windows and Linux are coming soon.
