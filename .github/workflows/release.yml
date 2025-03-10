@@ -97,6 +97,8 @@ jobs:
           APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
           APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
           APPLE_SIGNING_IDENTITY: ${{ env.CERT_ID }}
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
           CI: false
           NODE_OPTIONS: "--max_old_space_size=4096"
         with:
@@ -109,3 +111,4 @@ jobs:
           repo: temo-releases
           owner: aovoq
           releaseCommitish: main
+          includeUpdaterJson: true
